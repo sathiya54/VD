@@ -1,0 +1,73 @@
+{% extends "web/base.html" %}
+{% block title %}{% if is_new %}New Entry{% else %}Edit Entry{% endif %} — Virtual Diary{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% if is_new %}+ New Entry{% else %}Edit Entry{% endif %}</h1>
+
+<form method="post" enctype="multipart/form-data" id="diary-form">
+  {% csrf_token %}
+  <div class="row g-3">
+    <div class="col-md-8">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        {{ form.title }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Content</label>
+        <div id="quill-editor" class="border rounded p-2"></div>
+        {{ form.content }}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mb-3">
+        <label class="form-label">Date</label>
+        {{ form.date }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Time</label>
+        {{ form.time }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Mood</label>
+        {{ form.mood }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        {{ form.category }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">{{ form.tags_input.label }}</label>
+        {{ form.tags_input }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Cover image</label>
+        {{ form.cover_image }}
+      </div>
+      <div class="form-check mb-2">
+        {{ form.is_favorite }}
+        <label class="form-check-label">Favorite</label>
+      </div>
+      <div class="form-check mb-3">
+        {{ form.is_private }}
+        <label class="form-check-label">Private</label>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Save Entry</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+<script>
+  const sourceField = document.getElementById('id_content_editor_source');
+  sourceField.style.display = 'none';
+  const quill = new Quill('#quill-editor', { theme: 'snow' });
+  if (sourceField.value) {
+    quill.root.innerHTML = sourceField.value;
+  }
+  document.getElementById('diary-form').addEventListener('submit', function () {
+    sourceField.value = quill.root.innerHTML;
+  });
+</script>
+{% endblock %}

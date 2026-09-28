@@ -1,0 +1,42 @@
+{% extends "web/base.html" %}
+{% block title %}Help — Virtual Diary{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1 class="h3 mb-4">Help Center</h1>
+
+    <div class="accordion" id="helpAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#h1">Getting started</button></h2>
+        <div id="h1" class="accordion-collapse collapse show" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">Create an account, then use "+ New Entry" from the Diary page or the dashboard to write your first entry. Your writing streak starts counting from your first entry.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#h2">Creating diary entries</button></h2>
+        <div id="h2" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">Set a title, mood, category and tags, and write freely in the editor. Entries can be marked private, favorited, or moved to Trash (recoverable) instead of deleted outright.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#h3">Managing goals & tasks</button></h2>
+        <div id="h3" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">Goals track long-running progress with a percentage and milestones. Tasks are simpler to-dos that can optionally link to a goal or a diary entry.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#h4">Using AI</button></h2>
+        <div id="h4" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">AI features are optional and off by default. Turn them on from Profile → Settings, then use AI actions (summarize, improve writing, suggest tags) from the entry editor.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#h5">Privacy & account deletion</button></h2>
+        <div id="h5" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+          <div class="accordion-body">See our <a href="{% url 'web:privacy' %}">Privacy Policy</a> for what we collect and why. You can permanently delete your account and all its data at any time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

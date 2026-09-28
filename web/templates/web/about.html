@@ -1,0 +1,16 @@
+{% extends "web/base.html" %}
+{% block title %}About — Virtual Diary{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 text-center">
+    <h1 class="h2">📔 Virtual Diary</h1>
+    <p class="lead text-muted">Your memories. Your journey. Your story.</p>
+    <p>Virtual Diary is a private digital journal, memory vault and life
+      management tool — diary entries, mood tracking, goals, tasks,
+      reminders, a calendar, and personal analytics, in one place, available
+      from the web today and from Android/iOS via the companion mobile app.</p>
+    <p class="text-muted small">Version 0.1.0 (initial build)</p>
+    <p><a href="{% url 'web:privacy' %}">Privacy Policy</a> · <a href="{% url 'web:help' %}">Help</a></p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "web/base.html" %}
+{% block title %}Diary — Virtual Diary{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">📔 Diary</h1>
+  <a href="{% url 'web:diary-create' %}" class="btn btn-primary">+ New Entry</a>
+</div>
+
+<form method="get" class="row g-2 mb-3">
+  <div class="col-auto">
+    <input type="text" name="q" class="form-control" placeholder="Search entries..." value="{{ search }}">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+  </div>
+  <div class="col-auto">
+    <a href="?favorite=1" class="btn btn-outline-warning">★ Favorites</a>
+  </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-2 g-3">
+  {% for entry in entries %}
+  <div class="col">
+    <div class="card h-100 entry-card">
+      {% if entry.cover_image %}<img src="{{ entry.cover_image.url }}" class="card-img-top" style="max-height:160px;object-fit:cover;">{% endif %}
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="{% url 'web:diary-detail' entry.pk %}" class="text-decoration-none">{{ entry.title|default:"Untitled" }}</a>
+          {% if entry.is_favorite %}<span class="text-warning">★</span>{% endif %}
+        </h5>
+        <p class="card-text text-muted">{{ entry.content|truncatewords:20 }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">
+            {% if entry.mood %}<span class="mood-emoji">{{ entry.mood.emoji }}</span>{% endif %}
+            {{ entry.date }}
+            {% if entry.category %}· {{ entry.category.name }}{% endif %}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No entries found. <a href="{% url 'web:diary-create' %}">Write your first entry</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}

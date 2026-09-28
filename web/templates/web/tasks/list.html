@@ -1,0 +1,40 @@
+{% extends "web/base.html" %}
+{% block title %}Tasks — Virtual Diary{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">✅ Tasks</h1>
+
+<div class="row">
+  <div class="col-md-7">
+    {% for task in tasks %}
+    <div class="d-flex align-items-center mb-2">
+      <form method="post" action="{% url 'web:task-toggle' task.pk %}" class="me-2">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-secondary">{% if task.is_done %}✓{% else %}○{% endif %}</button>
+      </form>
+      <span class="{% if task.is_done %}text-decoration-line-through text-muted{% endif %}">{{ task.title }}</span>
+      {% if task.due_date %}<small class="text-muted ms-2">due {{ task.due_date }}</small>{% endif %}
+      <span class="badge text-bg-light ms-2">{{ task.get_priority_display }}</span>
+    </div>
+    {% empty %}
+    <p class="text-muted">No tasks yet.</p>
+    {% endfor %}
+  </div>
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="h6">Add a task</h2>
+        <form method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="mb-2">
+            <label class="form-label small">{{ field.label }}</label>
+            {{ field }}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary btn-sm w-100">Add Task</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

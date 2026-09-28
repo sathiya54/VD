@@ -1,0 +1,79 @@
+{% extends "web/base.html" %}
+{% block title %}Dashboard — Virtual Diary{% endblock %}
+{% block content %}
+<h1 class="h3 mb-1">Hello 👋 {{ user.first_name|default:user.username }}</h1>
+<p class="text-muted">{{ today }}</p>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card text-bg-warning h-100">
+      <div class="card-body">
+        <div class="streak-badge">🔥 {{ profile.current_streak }} Day Streak</div>
+        <div class="small text-muted">Longest: {{ profile.longest_streak }} days</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="fs-3 fw-bold">{{ total_entries }}</div>
+        <div class="text-muted">Entries</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 bg-primary-subtle">
+      <div class="card-body">
+        <div class="fw-semibold">Today's Prompt</div>
+        <p class="mb-2">"{{ prompt.text|default:"What was the best part of your day?" }}"</p>
+        <a href="{% url 'web:diary-create' %}" class="btn btn-sm btn-primary">+ Write Diary</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-md-6">
+    <h2 class="h5">Recent Entries</h2>
+    {% for entry in recent_entries %}
+      <a class="text-decoration-none text-body" href="{% url 'web:diary-detail' entry.pk %}">
+        <div class="card mb-2 entry-card">
+          <div class="card-body py-2">
+            <div class="d-flex justify-content-between">
+              <span>{% if entry.mood %}<span class="mood-emoji">{{ entry.mood.emoji }}</span>{% endif %} {{ entry.title|default:"Untitled" }}</span>
+              <small class="text-muted">{{ entry.date }}</small>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+      <p class="text-muted">No entries yet — <a href="{% url 'web:diary-create' %}">write your first one</a>.</p>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-3">
+    <h2 class="h5">Today's Tasks</h2>
+    {% for task in todays_tasks %}
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" disabled {% if task.is_done %}checked{% endif %}>
+        <label class="form-check-label">{{ task.title }}</label>
+      </div>
+    {% empty %}
+      <p class="text-muted small">No open tasks.</p>
+    {% endfor %}
+    <a href="{% url 'web:tasks-list' %}" class="small">Manage tasks →</a>
+  </div>
+
+  <div class="col-md-3">
+    <h2 class="h5">Upcoming</h2>
+    {% for reminder in upcoming_reminders %}
+      <div class="mb-2">
+        🔔 {{ reminder.title }}<br>
+        <small class="text-muted">{{ reminder.remind_at }}</small>
+      </div>
+    {% empty %}
+      <p class="text-muted small">Nothing scheduled.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

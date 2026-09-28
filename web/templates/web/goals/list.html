@@ -1,0 +1,32 @@
+{% extends "web/base.html" %}
+{% block title %}Goals — Virtual Diary{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">🎯 Goals</h1>
+  <a href="{% url 'web:goal-create' %}" class="btn btn-primary">+ New Goal</a>
+</div>
+
+{% for goal in goals %}
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h5 class="card-title">{{ goal.title }}</h5>
+      <span class="badge text-bg-{% if goal.status == 'completed' %}success{% elif goal.status == 'abandoned' %}secondary{% else %}primary{% endif %}">{{ goal.get_status_display }}</span>
+    </div>
+    <p class="text-muted">{{ goal.description }}</p>
+    <div class="progress mb-2" role="progressbar">
+      <div class="progress-bar" style="width: {{ goal.progress }}%">{{ goal.progress }}%</div>
+    </div>
+    {% if goal.milestones.all %}
+    <ul class="list-unstyled mb-0">
+      {% for m in goal.milestones.all %}
+      <li>{% if m.is_done %}✓{% else %}○{% endif %} {{ m.title }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+<p class="text-muted">No goals yet. <a href="{% url 'web:goal-create' %}">Create your first goal</a>.</p>
+{% endfor %}
+{% endblock %}

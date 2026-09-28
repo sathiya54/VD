@@ -1,0 +1,50 @@
+{% extends "web/base.html" %}
+{% block title %}Privacy Policy — Virtual Diary{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1 class="h3 mb-3">Privacy Policy</h1>
+    <p class="text-muted">Last updated: {% now "F Y" %}</p>
+
+    <h2 class="h5 mt-4">What we collect</h2>
+    <p>Your account email and username, the diary entries, moods, categories,
+      tags, goals, tasks, reminders, events and memories you create, and
+      basic usage metadata (timestamps, request logs) needed to operate the
+      service securely.</p>
+
+    <h2 class="h5 mt-4">Why we collect it</h2>
+    <p>Solely to provide the diary, goals, tasks, reminders, calendar,
+      memories and analytics features you use. We do not sell your data or
+      use it for advertising.</p>
+
+    <h2 class="h5 mt-4">How it is stored</h2>
+    <p>Data is stored in our database and file storage, accessible only to
+      your authenticated account. We do not currently encrypt diary content
+      at rest beyond standard database and transport (HTTPS) protections —
+      we will not claim end-to-end encryption unless that is actually
+      implemented.</p>
+
+    <h2 class="h5 mt-4">AI processing</h2>
+    <p>AI features are <strong>off by default</strong>. If you turn them on
+      in Settings, the specific text you submit to an AI action (e.g. "improve
+      writing") is sent to our AI provider (Anthropic) to generate a
+      response, and is not used to train their models under our agreement
+      with them. No diary content is sent to AI without you explicitly
+      triggering an AI action.</p>
+
+    <h2 class="h5 mt-4">Notifications</h2>
+    <p>Reminder, task and streak notifications are generated from your own
+      data and delivered in-app (and, on mobile, via your device's
+      notification system once configured). We do not share this data with
+      third-party advertisers.</p>
+
+    <h2 class="h5 mt-4">Account deletion</h2>
+    <p>You can permanently delete your account and its data from Settings
+      at any time. This is irreversible.</p>
+
+    <h2 class="h5 mt-4">Contact</h2>
+    <p>Questions about this policy can be directed to the app's support
+      contact listed in the About page.</p>
+  </div>
+</div>
+{% endblock %}

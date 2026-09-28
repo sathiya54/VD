@@ -1,0 +1,61 @@
+name: virtual_diary
+description: "Virtual Diary - AI-powered personal journal and life-management app."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+
+  # Networking
+  dio: ^5.4.0
+
+  # Secure token storage
+  flutter_secure_storage: ^9.0.0
+
+  # Local (non-secret) storage for drafts, theme prefs
+  shared_preferences: ^2.2.2
+
+  # State management
+  provider: ^6.1.1
+
+  # Formatting
+  intl: ^0.19.0
+
+  # Media pickers
+  image_picker: ^1.0.7
+  file_picker: ^6.1.1
+
+  # Calendar UI
+  table_calendar: ^3.0.9
+
+  # Charts
+  fl_chart: ^0.66.2
+
+  # Local notifications for reminders
+  flutter_local_notifications: ^17.0.0
+
+  # Networked images with caching
+  cached_network_image: ^3.3.1
+
+  # Optional custom fonts
+  google_fonts: ^6.1.0
+
+  # Share entries
+  share_plus: ^7.2.1
+
+  # Unique ids for local drafts
+  uuid: ^4.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
