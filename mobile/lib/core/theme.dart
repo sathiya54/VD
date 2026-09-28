@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Centralized Material 3 theming for Virtual Diary.
 class AppColors {
@@ -8,6 +9,9 @@ class AppColors {
   static const Color success = Color(0xFF2E7D32);
   static const Color warning = Color(0xFFED6C02);
   static const Color danger = Color(0xFFD32F2F);
+
+  static const List<Color> streakGradient = [Color(0xFFF2994A), Color(0xFFF2C94C)];
+  static const List<Color> primaryGradient = [Color(0xFF6750A4), Color(0xFF9C6ADE)];
 }
 
 class AppTheme {
@@ -22,16 +26,32 @@ class AppTheme {
       brightness: brightness,
     );
 
+    final baseTextTheme = ThemeData(brightness: brightness).textTheme;
+    final bodyTextTheme = GoogleFonts.interTextTheme(baseTextTheme);
+    final textTheme = bodyTextTheme.copyWith(
+      headlineLarge: GoogleFonts.poppins(textStyle: bodyTextTheme.headlineLarge, fontWeight: FontWeight.w700),
+      headlineMedium: GoogleFonts.poppins(textStyle: bodyTextTheme.headlineMedium, fontWeight: FontWeight.w700),
+      headlineSmall: GoogleFonts.poppins(textStyle: bodyTextTheme.headlineSmall, fontWeight: FontWeight.w700),
+      titleLarge: GoogleFonts.poppins(textStyle: bodyTextTheme.titleLarge, fontWeight: FontWeight.w600),
+      titleMedium: GoogleFonts.poppins(textStyle: bodyTextTheme.titleMedium, fontWeight: FontWeight.w600),
+    );
+
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
       colorScheme: colorScheme,
+      textTheme: textTheme,
       scaffoldBackgroundColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
         centerTitle: false,
+        titleTextStyle: GoogleFonts.poppins(
+          textStyle: baseTextTheme.titleLarge,
+          fontWeight: FontWeight.w700,
+          color: colorScheme.onSurface,
+        ),
       ),
       cardTheme: CardThemeData(
         elevation: 1,

@@ -27,6 +27,9 @@
   </div>
 </div>
 {% empty %}
-<p class="text-muted">No goals yet. <a href="{% url 'web:goal-create' %}">Create your first goal</a>.</p>
+<div class="empty-state">
+  <div class="empty-icon">🎯</div>
+  <p class="mb-0">No goals yet. <a href="{% url 'web:goal-create' %}">Create your first goal</a>.</p>
+</div>
 {% endfor %}
 {% endblock %}

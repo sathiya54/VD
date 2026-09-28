@@ -33,14 +33,19 @@
           <small class="text-muted">
             {% if entry.mood %}<span class="mood-emoji">{{ entry.mood.emoji }}</span>{% endif %}
             {{ entry.date }}
-            {% if entry.category %}· {{ entry.category.name }}{% endif %}
           </small>
+          {% if entry.category %}<span class="badge text-bg-primary bg-opacity-75">{{ entry.category.name }}</span>{% endif %}
         </div>
       </div>
     </div>
   </div>
   {% empty %}
-  <p class="text-muted">No entries found. <a href="{% url 'web:diary-create' %}">Write your first entry</a>.</p>
+  <div class="col-12">
+    <div class="empty-state">
+      <div class="empty-icon">📔</div>
+      <p class="mb-0">No entries found. <a href="{% url 'web:diary-create' %}">Write your first entry</a>.</p>
+    </div>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}

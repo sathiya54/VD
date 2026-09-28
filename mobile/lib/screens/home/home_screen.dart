@@ -83,7 +83,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          Card(
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              gradient: LinearGradient(
+                colors: [
+                  theme.colorScheme.primary.withOpacity(0.14),
+                  theme.colorScheme.primary.withOpacity(0.04),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(color: theme.colorScheme.primary.withOpacity(0.15)),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

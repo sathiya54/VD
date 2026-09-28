@@ -6,15 +6,15 @@
 
 <div class="row g-3 mb-4">
   <div class="col-md-4">
-    <div class="card text-bg-warning h-100">
+    <div class="card stat-tile stat-tile-streak h-100">
       <div class="card-body">
         <div class="streak-badge">🔥 {{ profile.current_streak }} Day Streak</div>
-        <div class="small text-muted">Longest: {{ profile.longest_streak }} days</div>
+        <div class="small">Longest: {{ profile.longest_streak }} days</div>
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="card h-100">
+    <div class="card stat-tile stat-tile-plain h-100">
       <div class="card-body">
         <div class="fs-3 fw-bold">{{ total_entries }}</div>
         <div class="text-muted">Entries</div>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="card h-100 bg-primary-subtle">
+    <div class="card stat-tile stat-tile-prompt h-100">
       <div class="card-body">
         <div class="fw-semibold">Today's Prompt</div>
         <p class="mb-2">"{{ prompt.text|default:"What was the best part of your day?" }}"</p>
@@ -47,7 +47,7 @@
         </div>
       </a>
     {% empty %}
-      <p class="text-muted">No entries yet — <a href="{% url 'web:diary-create' %}">write your first one</a>.</p>
+      <p class="text-muted small">No entries yet — <a href="{% url 'web:diary-create' %}">write your first one</a>.</p>
     {% endfor %}
   </div>
 
